@@ -40,3 +40,6 @@ jobs:
         env:
           TENCENT_SECRET_ID: ${{ secrets.TENCENT_SECRET_ID }}
           TENCENT_SECRET_KEY: ${{ secrets.TENCENT_SECRET_KEY }}
+          SCF_FUNCTION_NAME: ${{ vars.SCF_FUNCTION_NAME }}
+          SCF_NAMESPACE: ${{ vars.SCF_NAMESPACE }}
+          SCF_REGION: ${{ vars.SCF_REGION }}

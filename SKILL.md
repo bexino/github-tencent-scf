@@ -20,7 +20,7 @@ description: 将 GitHub 中的静态站点从零部署到腾讯云 SCF，或将�
 1. 根据项目实际情况准备构建命令和静态资源目录。参考 [assets/app.js](assets/app.js)、[assets/scf_bootstrap](assets/scf_bootstrap)：Web 服务监听 `0.0.0.0:9000`，资源放在 `public/`，启动文件位于 ZIP 根目录且有执行权限。该示例是 Node 静态服务器，只适用于静态站；根据路由、资源类型及安全需求调整。`scf_bootstrap` 中的 Node 路径必须按所选腾讯云运行时核实并改写，不能照搬示例的 Node 16 路径。
 2. 在腾讯云控制台选择目标地域和命名空间，创建标准 SCF **Web 函数**，使用当前可新建且受支持的 Node.js 运行时（优先评估 Node.js 20.19 或更新版本），配置内存、超时和公网访问入口。避免创建同名资源或覆盖非目标函数。首次创建可通过控制台完成；之后代码更新必须走 Python SDK。创建过程若要求支付、实名或授权，让用户处理对应步骤。
 3. 配置并验证可访问的入口：优先在控制台为函数启用公网函数 URL；如不支持则配置 API 网关触发器并发布。记录实际 URL、地域、版本或别名及鉴权设置。已有入口按实际类型保留，不要把 API 网关域名与函数 URL 混为一谈。
-4. 参考 [assets/tencent-scf.yml](assets/tencent-scf.yml) 和 [assets/deploy.py](assets/deploy.py) 生成适配目标项目的工作流和 SDK 脚本。示例来自已有项目：必须替换脚本里的 `siss`、`ap-nanjing`、`default`，适配分支、构建、依赖管理、输出目录、运行时和路径，绝不直接部署到示例资源。脚本仅调用 GetFunction 和 UpdateFunctionCode，不创建函数或改变配置。检查 ZIP 大小；直接上传接口限制以当前文档为准（示例限制 20 MiB），超限改用官方支持的 COS 方式或说明阻碍。压缩时从包根目录打包，保留启动文件权限。
+4. 参考 [assets/tencent-scf.yml](assets/tencent-scf.yml) 和 [assets/deploy.py](assets/deploy.py) 生成适配目标项目的工作流和 SDK 脚本。根据已核实的目标，在 GitHub 仓库 **Settings → Secrets and variables → Actions → Variables** 中设置 `SCF_FUNCTION_NAME`、`SCF_NAMESPACE` 和 `SCF_REGION`，或在工作流中明确提供这三个环境变量；缺少任一值时脚本会停止。适配分支、构建、依赖管理、输出目录、运行时和路径。脚本仅调用 GetFunction 和 UpdateFunctionCode，不创建函数或改变配置。检查 ZIP 大小；直接上传接口限制以当前文档为准（示例限制 20 MiB），超限改用官方支持的 COS 方式或说明阻碍。压缩时从包根目录打包，保留启动文件权限。
 5. 将改动提交并推送到用户授权的目标分支，必要时以手动触发运行工作流；监测 GitHub Actions 的结果。仅在用户授权范围内修改远程仓库和云资源，遵循当前环境的权限要求。函数恢复 Active 并不单独证明站点可用，检查代码更新结果后访问首页和至少一个静态资源；SPA 刷新、子路径和自定义域名按项目实际验证。记录运行链接、函数和访问 URL；失败时检查日志但不泄露密钥，准确报告未完成步骤。
 
 ## 从 Serverless 迁移
