@@ -7,7 +7,7 @@
 ### 须知
 
 > [!CAUTION]
-> **请勿在聊天或公开仓库中提供密钥！**　　
+> **请勿在聊天或公开仓库中提供密钥！**  
 > 　包括但不限于：
 >
 > - `TENCENT_SECRET_ID`
@@ -38,9 +38,9 @@
 
 ### 前置工作
 
-1. 在内置浏览器中：　　
-   - 登录腾讯云（必须）；　　
-   - 登录 Github（可选）。　　
+1. 在内置浏览器中：  
+   - 登录腾讯云（必须）；  
+   - 登录 Github（可选）。  
 
 > [!NOTE]
 > `TENCENT_SECRET_ID` 和 `TENCENT_SECRET_KEY` 需要在腾讯云中获取。
@@ -48,19 +48,19 @@
 >   - 待配置完成后，建议自行备份方便下次使用。
 > - **再次使用时**：可以根据下文内容预先填写到 Github 以提高效率，该配置可以复用。
 
-- 在目标仓库的 `Settings → Secrets and variables → Actions` 中配置：　　
-  - 在 `Repository Secrets`中：　　
-    - 新建（`New repository secret`）： 　　
-      - `TENCENT_SECRET_ID` ：对应腾讯云 `SecretId` 值；　　
-      -  `TENCENT_SECRET_KEY` ；对应腾讯云 ` SecretKey` 值。　　
+- 在目标仓库的 `Settings → Secrets and variables → Actions` 中配置：  
+  - 在 `Repository Secrets`中：  
+    - 新建（`New repository secret`）：   
+      - `TENCENT_SECRET_ID` ：对应腾讯云 `SecretId` 值；  
+      -  `TENCENT_SECRET_KEY` ；对应腾讯云 ` SecretKey` 值。  
 
 ## 技术细节
 
-- 技能说明见 [SKILL.md](SKILL.md)，`　　
-- Agent 会核实站点及资源归属、配置访问入口；新网站默认创建独立函数。　　
-- 迁移时仅沿用确认属于该网站的现有函数。　　　　
-- `assets/` 包含需要根据目标项目调整的示例。　　
-- `Variables`：`SCF_FUNCTION_NAME`、`SCF_NAMESPACE` 和 `SCF_REGION` 分别为实际函数名、命名空间和地域，Agent 会在有权限时自动配置并核对。　　
+- 技能说明见 [SKILL.md](SKILL.md)，`  
+- Agent 会核实站点及资源归属、配置访问入口；新网站默认创建独立函数。  
+- 迁移时仅沿用确认属于该网站的现有函数。    
+- `assets/` 包含需要根据目标项目调整的示例。  
+- `Variables`：`SCF_FUNCTION_NAME`、`SCF_NAMESPACE` 和 `SCF_REGION` 分别为实际函数名、命名空间和地域，Agent 会在有权限时自动配置并核对。  
 
 ### 技术栈
 
